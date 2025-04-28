@@ -7,6 +7,10 @@ public class ChimeHillAI : MonoBehaviour
     public float senseRange;
     public GameObject player;
     public ChimeState aiState = ChimeState.idle;
+    private Rigidbody2D rb;
+    private float flipTimer = 75;
+    
+    public float walkSpeed = 2f;
     public enum ChimeState 
     {
         idle,
@@ -17,14 +21,18 @@ public class ChimeHillAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        if (flipTimer > 0) 
+        {
+            flipTimer -= 1;
+        }
         //update state by proximity
-        if (Vector3.Distance(player.transform.position, transform.position) > senseRange)
+        if (Vector3.Distance(player.transform.position, transform.position) < senseRange)
         {
             aiState = ChimeState.pursue;
         }
@@ -37,7 +45,24 @@ public class ChimeHillAI : MonoBehaviour
         switch (aiState) 
         {
             case ChimeState.idle:
-                break;
+                if (flipTimer == 0) 
+                {
+                    flipTimer += 75;
+                    GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
+                    rb.velocity = rb.velocity * new Vector2(0, 1);
+                }
+
+                if (!GetComponent<SpriteRenderer>().flipX)
+                {
+                    rb.velocity += Vector2.right * -1 * walkSpeed * Time.deltaTime;
+                }
+                else 
+                {
+                    rb.velocity += Vector2.right * walkSpeed * Time.deltaTime;
+                }
+
+
+                    break;
             case ChimeState.pursue:
                 break;
            
@@ -52,7 +77,7 @@ public class ChimeHillAI : MonoBehaviour
         if (collision.CompareTag("Player")) 
         {
             collision.gameObject.GetComponent<Health>().damage();
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce((collision.transform.position - transform.position) * 4f, ForceMode2D.Impulse);
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce((collision.transform.position - transform.position) * -10f, ForceMode2D.Impulse);
         }
     }
 }
