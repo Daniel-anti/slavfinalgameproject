@@ -1,0 +1,101 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+
+    public enum pS 
+    {
+        rI, //right idle
+        lI, // left 
+        rR,
+        lR,
+        rJ,
+        lJ,
+    }
+    public pS playerState;
+    private Rigidbody2D rb;
+    public float maxSpeed = 5f;
+    public float acc = 2f;
+    public float jumpForce = 5f;
+    public bool isGrounded;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        isGrounded = true;
+        playerState = pS.rI;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //You know I'm hacking this together quickly when this is the first fucking line I write.
+        float h = Input.GetAxisRaw("Horizontal");
+
+        
+
+        if (Mathf.Abs(rb.velocity.x) < maxSpeed) 
+        {
+            rb.velocity += new Vector2(2f * h,0);
+        
+        }
+
+        if (Input.GetKey(KeyCode.Space) && isGrounded)  
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
+            isGrounded = false;
+        }
+
+        
+        
+        if (Mathf.Abs(rb.velocity.x) > 0.1f) 
+        {
+            if (rb.velocity.x > 0)
+            {
+                playerState = pS.rR;
+            }
+            else 
+            {
+                playerState = pS.lR;
+            }
+        }
+        //If is idle
+        if (Mathf.Abs(rb.velocity.x) <= 0.1f)
+        {
+            switch (playerState) 
+            {
+                case pS.rR:
+                    playerState = pS.rI;
+                    break;
+                case pS.lR:
+                    playerState = pS.lI;
+                    break;
+                case pS.rJ:
+                    playerState = pS.rI;
+                    break;
+                case pS.lJ:
+                    playerState = pS.lI;
+                    break;
+            }
+        }
+        //If is in the air (should overwrite the above)
+        if (Mathf.Abs(rb.velocity.y) > 0.1f)
+        {
+            if (rb.velocity.x >= 0)
+            {
+                playerState = pS.rJ;
+            }
+            else
+            {
+                playerState = pS.lJ;
+            }
+        }
+        
+
+
+
+    }
+}
