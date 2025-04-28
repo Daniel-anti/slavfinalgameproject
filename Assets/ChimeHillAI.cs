@@ -64,8 +64,18 @@ public class ChimeHillAI : MonoBehaviour
 
                     break;
             case ChimeState.pursue:
+                float horizontalDirection = player.transform.position.x > transform.position.x ? 1f : -1f;
+                rb.velocity = new Vector2(horizontalDirection * walkSpeed, rb.velocity.y);
+                if (horizontalDirection < 0)
+                {
+                    GetComponent<SpriteRenderer>().flipX = false;
+                }
+                else
+                {
+                    GetComponent<SpriteRenderer>().flipX = true;
+                }
                 break;
-           
+
         }
 
 
