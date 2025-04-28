@@ -87,10 +87,10 @@ public class ManualPlayerAnimator : MonoBehaviour
         {
             case true:
                 return idle2;
-                break;
+                
             case false:
                 return idle1;
-                break;
+                
         }
     }
 

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2996222786340744321}
   - component: {fileID: 1628154713199015768}
   - component: {fileID: 6577503221442556633}
+  - component: {fileID: 7069874800206622229}
   m_Layer: 0
   m_Name: VampireKiller
   m_TagString: Untagged
@@ -223,3 +224,17 @@ MonoBehaviour:
   player: {fileID: 0}
   aiState: 0
   walkSpeed: 2
+--- !u!114 &7069874800206622229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6616246448327390960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02bd9719b6c0c0647a317824dd5e2687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  deathTimer: -1

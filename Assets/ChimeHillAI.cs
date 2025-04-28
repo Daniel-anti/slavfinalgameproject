@@ -94,7 +94,7 @@ public class ChimeHillAI : MonoBehaviour
         if (collision.CompareTag("Player") && GetComponent<EnemyHealth>().deathTimer <= 0) 
         {
             collision.gameObject.GetComponent<Health>().damage();
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce((collision.transform.position - transform.position) * -10f, ForceMode2D.Impulse);
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce( new Vector3((collision.transform.position - transform.position).x,0,0) * -10f, ForceMode2D.Impulse);
         }
     }
 }
