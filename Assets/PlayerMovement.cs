@@ -21,12 +21,20 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 5f;
     public bool isGrounded;
 
+    public Transform rightSlash;
+    public Transform leftSlash;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         isGrounded = true;
         playerState = pS.rI;
+        rightSlash = transform.Find("SlashRight");
+        leftSlash = transform.Find("SlashLeft");
+
+        rightSlash.gameObject.SetActive(false);
+        leftSlash.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -101,6 +109,26 @@ public class PlayerMovement : MonoBehaviour
         else 
         {
             rb.gravityScale = 1;
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.K)) 
+        {
+            switch (playerState) 
+            {
+                case pS.rR:
+                    rightSlash.gameObject.SetActive(true);
+                    break;
+                case pS.lR:
+                    leftSlash.gameObject.SetActive(true);
+                    break;
+                case pS.rJ:
+                    rightSlash.gameObject.SetActive(true);
+                    break;
+                case pS.lJ:
+                    leftSlash.gameObject.SetActive(true);
+                    break;
+            }
         }
         
 

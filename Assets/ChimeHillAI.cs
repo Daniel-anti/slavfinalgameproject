@@ -29,6 +29,11 @@ public class ChimeHillAI : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        if (GetComponent<EnemyHealth>().deathTimer > 0) 
+        {
+            return;
+        }
         if (flipTimer > 0) 
         {
             flipTimer -= 1;
@@ -91,7 +96,7 @@ public class ChimeHillAI : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player")) 
+        if (collision.CompareTag("Player") && GetComponent<EnemyHealth>().deathTimer <= 0) 
         {
             collision.gameObject.GetComponent<Health>().damage();
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce((collision.transform.position - transform.position) * -10f, ForceMode2D.Impulse);
