@@ -14,6 +14,7 @@ public class HeartScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         fullHeart = full.GetComponent<Animator>().runtimeAnimatorController;
         emptyHeart = empty.GetComponent<Animator>().runtimeAnimatorController;
     }

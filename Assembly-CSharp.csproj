@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Health.cs" />
+    <Compile Include="Assets\ChimeHillAI.cs" />
     <Compile Include="Assets\ManualPlayerAnimator.cs" />
     <Compile Include="Assets\groundedScript.cs" />
     <Compile Include="Assets\DetectAndDamagePlayer.cs" />
