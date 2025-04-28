@@ -12,13 +12,17 @@ public class Health : MonoBehaviour
     private float frame;
     public bool inSun = false;
     public GameObject burnSprite;
+
+    public AudioSource hurt;
+
     // Start is called before the first frame update
     void Start()
     {
         sR = GetComponent<SpriteRenderer>();
         burnSprite.SetActive(false);
-
+        hurt = transform.Find("AudioSources/Hurt").gameObject.GetComponent<AudioSource>();
     }
+
 
     // Update is called once per frame
     void Update()
@@ -84,6 +88,7 @@ public class Health : MonoBehaviour
 
     public void damage() 
     {
+        hurt.PlayOneShot(hurt.clip);
         health -= 1;
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         invinceTimer += 50;

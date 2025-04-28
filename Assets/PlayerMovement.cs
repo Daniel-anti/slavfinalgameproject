@@ -24,6 +24,10 @@ public class PlayerMovement : MonoBehaviour
     public Transform rightSlash;
     public Transform leftSlash;
 
+
+    public AudioSource jump;
+    public AudioSource slash;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +39,11 @@ public class PlayerMovement : MonoBehaviour
 
         rightSlash.gameObject.SetActive(false);
         leftSlash.gameObject.SetActive(false);
+
+        jump = transform.Find("AudioSources/Jump").gameObject.GetComponent<AudioSource>();
+        slash = transform.Find("AudioSources/Slash").gameObject.GetComponent<AudioSource>();
+
+
     }
 
     // Update is called once per frame
@@ -53,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space) && isGrounded)  
         {
+            jump.PlayOneShot(jump.clip);
             rb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
         }
@@ -114,6 +124,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.K)) 
         {
+            slash.PlayOneShot(slash.clip);
             switch (playerState) 
             {
                 case pS.rR:

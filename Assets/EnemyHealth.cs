@@ -35,7 +35,7 @@ public class EnemyHealth : MonoBehaviour
         if (collision.CompareTag("hurtbox"))
         {
             health -= 1;
-
+            GetComponent<AudioSource>().PlayOneShot(GetComponent<AudioSource>().clip);
 
 
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
