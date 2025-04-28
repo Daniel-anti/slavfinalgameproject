@@ -67,6 +67,7 @@
     <Compile Include="Assets\DetectAndDamagePlayer.cs" />
     <Compile Include="Assets\SunBeamMovementandCloning.cs" />
     <Compile Include="Assets\PlayerMovement.cs" />
+    <Compile Include="Assets\CameraTrack.cs" />
     <Compile Include="Assets\HeartScript.cs" />
   </ItemGroup>
   <ItemGroup>

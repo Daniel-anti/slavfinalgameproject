@@ -93,6 +93,15 @@ public class PlayerMovement : MonoBehaviour
                 playerState = pS.lJ;
             }
         }
+
+        if (rb.velocity.y < -0.1f)
+        {
+            rb.gravityScale = 3;
+        }
+        else 
+        {
+            rb.gravityScale = 1;
+        }
         
 
 

@@ -9,6 +9,7 @@ public class ChimeHillAI : MonoBehaviour
     public ChimeState aiState = ChimeState.idle;
     private Rigidbody2D rb;
     private float flipTimer = 75;
+    private SpriteRenderer sR;
     
     public float walkSpeed = 2f;
     public enum ChimeState 
@@ -22,6 +23,7 @@ public class ChimeHillAI : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sR = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -64,6 +66,21 @@ public class ChimeHillAI : MonoBehaviour
 
                     break;
             case ChimeState.pursue:
+                if (rb.velocity.x <= walkSpeed)
+                {
+                    rb.velocity += new Vector2(((Vector2)(player.transform.position - transform.position) * (walkSpeed * 0.5f) * Time.deltaTime).x, 0);
+                }
+               
+
+                if (rb.velocity.x < 0)
+                {
+                    sR.flipX = false;
+                }
+                else if (rb.velocity.x > 0)
+                {
+                    sR.flipX = true;
+                }
+
                 break;
            
         }
